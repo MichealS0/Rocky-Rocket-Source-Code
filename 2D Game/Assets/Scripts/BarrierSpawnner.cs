@@ -9,10 +9,11 @@ public class BarrierSpawnner : MonoBehaviour
     public float Tmax;
     public float Timer;
     public float LeftSpeed;
+    public bool StartedGame;
 
     void Start()
     {
-        
+        StartedGame = false;
     }
 
     // Update is called once per frame
@@ -20,10 +21,12 @@ public class BarrierSpawnner : MonoBehaviour
     {
         Timer += Time.deltaTime;
 
-        if (Timer >= Tmax)
-        {
+        if (Timer >= Tmax && StartedGame)
+        { 
+                       
             newObstacle();
             Timer = 0f;
+
         }
         
     }
@@ -33,7 +36,10 @@ public class BarrierSpawnner : MonoBehaviour
 
         float randPosY = Random.Range(yMin, yMax);
         GameObject anotherObstacle = Instantiate(barrierPrefab);
-        anotherObstacle.transform.position = new Vector2(transform.position.x, randPosY);
-
+        
+        if (StartedGame)
+        {
+            anotherObstacle.transform.position = new Vector2(transform.position.x, randPosY);
+        }
     }
 }
