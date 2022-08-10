@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class rockeyMovement : MonoBehaviour
 {
     // Variables
     private float gravity;
     private Vector2 startPos;
+    public bool dead;
 
     // Refrences
     public Rigidbody2D rb;
     public BarrierSpawnner spawnner;
-
+    public Renderer rend;
+    public MainMen menStart;
     public static rockeyMovement Instance { get; private set; }
 
     void Start()
@@ -19,8 +22,17 @@ public class rockeyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
         rb.gravityScale = 0;
-        spawnner.StartedGame = false;
-        
+
+        rend = GetComponent<Renderer>();
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        dead = true;
+        gravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        startPos = transform.position;
+        SceneManager.LoadScene(0);
     }
 
     void Update()
@@ -29,7 +41,7 @@ public class rockeyMovement : MonoBehaviour
         {
             rb.gravityScale = 2;
         }
-        else
+        if (spawnner.StartedGame == false)
         {
             transform.position = new Vector2(0, 0);
         }

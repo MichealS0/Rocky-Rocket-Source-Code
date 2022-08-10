@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BarrierSpawnner : MonoBehaviour
@@ -11,12 +9,6 @@ public class BarrierSpawnner : MonoBehaviour
     public float LeftSpeed;
     public bool StartedGame;
 
-    void Start()
-    {
-        StartedGame = false;
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Timer += Time.deltaTime;
