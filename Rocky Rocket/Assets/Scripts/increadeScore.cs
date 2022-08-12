@@ -10,8 +10,10 @@ public class increadeScore : MonoBehaviour
     {
         if (other.collider.tag == "Player")
         {
+            
             sc.score++;
             sc.ScoreUp();
+            
         }
     }
 }

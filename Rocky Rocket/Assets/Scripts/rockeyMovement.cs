@@ -13,6 +13,7 @@ public class rockeyMovement : MonoBehaviour
     public BarrierSpawnner spawnner;
     public Renderer rend;
     public MainMen menStart;
+    public ScoreScrpt sc;
     public static rockeyMovement Instance { get; private set; }
 
     void Start()
@@ -33,6 +34,16 @@ public class rockeyMovement : MonoBehaviour
         rb.gravityScale = 0;
         startPos = transform.position;
         SceneManager.LoadScene(0);
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Collider>().tag == "scoreIncrease")
+        {
+            sc.score += 1;
+            Debug.Log(sc.score);
+        }
     }
 
     void Update()
